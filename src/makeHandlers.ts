@@ -5,7 +5,7 @@ export interface Authenticator {
 }
 export default (authenticators: Authenticator[]) => {
   return {
-    preSignUp: async (event) => {
+    makePreSignUp: async (event) => {
       const {
         request: {
           clientMetadata: { signupType },
@@ -13,10 +13,9 @@ export default (authenticators: Authenticator[]) => {
       } = event;
       const { preSignUp } =
         authenticators.find(({ key }) => key === signupType) || {};
-      if (!preSignUp) throw new Error("No Signup method for " + signupType);
-      return preSignUp(event);
+      return preSignUp;
     },
-    confirmSignUp: async (event) => {
+    makeConfirmSignUp: async (event) => {
       const {
         request: {
           clientMetadata: { signupType },
@@ -24,8 +23,7 @@ export default (authenticators: Authenticator[]) => {
       } = event;
       const { confirmSignUp } =
         authenticators.find(({ key }) => key === signupType) || {};
-      if (!confirmSignUp) throw new Error("No Signup method for " + signupType);
-      return confirmSignUp(event);
+      return confirmSignUp;
     },
   };
 };

@@ -1,0 +1,39 @@
+{
+  "name": "cognito-custom-auth-signup",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhdeck/cognito-custom-auth-signup.git"
+  },
+  "author": "Ray Deck",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhdeck/cognito-custom-auth-signup/issues"
+  },
+  "homepage": "https://github.com/rhdeck/cognito-custom-auth-signup#readme",
+  "main": "dist/index.js",
+  "types": "./dist/types",
+  "devDependencies": {
+    "@raydeck/livelink": "^1.5.2",
+    "typescript": "^3.9.6"
+  },
+  "liveLink": {
+    "ignoreMasks": [
+      "dist/*"
+    ]
+  },
+  "dependencies": {
+    "@types/node": "^14.0.14",
+    "aws-sdk": "^2.709.0",
+    "google-auth-library": "^6.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^1.8.1",
+    "jwt-decode": "^2.2.0",
+    "ms": "^2.1.2"
+  }
+}

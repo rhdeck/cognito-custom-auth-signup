@@ -25,8 +25,8 @@ const preSignUp = async (event) => {
       userAttributes: {
         email: cognitoEmail,
         preferred_username: cognitoUsername,
-        idToken,
       },
+      clientMetadata: { idToken },
     },
   } = event;
   const decoded = decode(idToken);
@@ -38,7 +38,11 @@ const preSignUp = async (event) => {
   if (verified && (email === cognitoEmail || sub === cognitoUsername))
     return {
       ...event,
-      response: { autoConfirmEmail: true, autoConfirmUser: true },
+      response: {
+        ...event.response,
+        autoVerifyEmail: cognitoEmail === email,
+        autoConfirmUser: true,
+      },
     };
   else throw new Error("Could not authenticate");
 };

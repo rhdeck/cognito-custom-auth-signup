@@ -5,17 +5,21 @@ export interface Authenticator {
 }
 export default (authenticators: Authenticator[]) => {
   return {
-    makePreSignUp: async (event) => {
+    makePreSignUp: (event) => {
       const {
         request: {
           clientMetadata: { signupType },
         },
       } = event;
+      console.log(
+        "Starting to run makePreSignup with signupType of",
+        signupType
+      );
       const { preSignUp } =
         authenticators.find(({ key }) => key === signupType) || {};
       return preSignUp;
     },
-    makeConfirmSignUp: async (event) => {
+    makeConfirmSignUp: (event) => {
       const {
         request: {
           clientMetadata: { signupType },

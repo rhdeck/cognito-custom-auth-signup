@@ -6,7 +6,8 @@ export default (clientId: string, clientIds?: string[]): Authenticator => ({
   preSignUp: async (event) => {
     const {
       request: {
-        userAttributes: { email, preferred_username, idToken },
+        userAttributes: { email, preferred_username },
+        clientMetadata: { idToken },
       },
     } = event;
     const client = new OAuth2Client(process.env.googleClientId);
@@ -21,10 +22,15 @@ export default (clientId: string, clientIds?: string[]): Authenticator => ({
       if (payload.email === email || payload.sub === preferred_username)
         return {
           ...event,
-          response: { autoConfirmUser: true, confirmEmail: true },
+          response: {
+            ...event.response,
+            autoConfirmUser: payload.email === email,
+            autoVerifyEmail: true,
+          },
         };
       else throw new Error("Email mismatch");
     } catch (e) {
+      console.warn(e);
       throw new Error("Could not authenticate");
     }
   },

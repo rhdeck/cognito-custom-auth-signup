@@ -11,10 +11,6 @@ export default (authenticators: Authenticator[]) => {
           clientMetadata: { signupType },
         },
       } = event;
-      console.log(
-        "Starting to run makePreSignup with signupType of",
-        signupType
-      );
       const { preSignUp } =
         authenticators.find(({ key }) => key === signupType) || {};
       return preSignUp;

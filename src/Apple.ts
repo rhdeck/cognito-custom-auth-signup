@@ -22,10 +22,7 @@ const getSigningKey = (kid: string): Promise<jwksClient.SigningKey> =>
 const preSignUp = async (event) => {
   const {
     request: {
-      userAttributes: {
-        email: cognitoEmail,
-        preferred_username: cognitoUsername,
-      },
+      userAttributes: { email: cognitoEmail },
       clientMetadata: { idToken },
     },
   } = event;

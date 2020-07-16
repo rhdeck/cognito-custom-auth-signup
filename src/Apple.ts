@@ -26,7 +26,7 @@ const preSignUp = async (event) => {
         email: cognitoEmail,
         preferred_username: cognitoUsername,
       },
-      clientMetadata: { idToken },
+      clientMetadata: { idToken } = { idToken: undefined },
     },
   } = event;
   const decoded = decode(idToken);

@@ -7,7 +7,7 @@ export default (clientId: string, clientIds?: string[]): Authenticator => ({
     const {
       request: {
         userAttributes: { email, preferred_username },
-        clientMetadata: { idToken },
+        clientMetadata: { idToken } = { idToken = undefined },
       },
     } = event;
     const client = new OAuth2Client(process.env.googleClientId);
